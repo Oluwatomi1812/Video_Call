@@ -1,3 +1,54 @@
+// Install required dependencies:
+// npm install express socket.io
+
+// Import necessary modules
+const express = require('express');
+const http = require('http');
+const socketIO = require('socket.io');
+
+// Create Express app
+const app = express();
+const server = http.createServer(app);
+const io = socketIO(server);
+
+// Serve static files
+app.use(express.static('public'));
+
+// Handle WebSocket connections
+io.on('connection', (socket) => {
+  console.log('New WebSocket connection:', socket.id);
+
+  // Handle signaling messages
+  socket.on('offer', (data) => {
+    // Process the received offer and send it to the intended recipient
+    // You may store the offer in a database or use other techniques to route it
+
+    // Example: Broadcasting the offer to all connected sockets
+    socket.broadcast.emit('offer', data);
+  });
+
+  socket.on('answer', (data) => {
+    // Process the received answer and send it to the intended recipient
+    // You may store the answer in a database or use other techniques to route it
+
+    // Example: Broadcasting the answer to all connected sockets
+    socket.broadcast.emit('answer', data);
+  });
+
+  socket.on('ice-candidate', (data) => {
+    // Process the received ICE candidate and send it to the intended recipient
+    // You may store the candidate in a database or use other techniques to route it
+
+    // Example: Broadcasting the ICE candidate to all connected sockets
+    socket.broadcast.emit('ice-candidate', data);
+  });
+
+  // Handle disconnection
+  socket.on('disconnect', () => {
+    console.log('WebSocket disconnected:', socket.id);
+  });
+});
+
 // JavaScript
 const startButton = document.getElementById('startButton');
 const stopButton = document.getElementById('stopButton');
@@ -134,3 +185,9 @@ function sendIceCandidate(candidate) {
   const message = { type: 'iceCandidate', candidate };
   signalingSocket.send(JSON.stringify(message));
 }
+
+// Start the server
+const port = 3000;
+server.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
