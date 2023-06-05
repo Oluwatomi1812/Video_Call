@@ -1,34 +1,21 @@
 const express = require('express');
-const http = require('http');
-const socketIO = require('socket.io');
-
 const app = express();
+const http = require('http');
 const server = http.createServer(app);
-const io = socketIO(server);
+const { Server } = require("socket.io");
+const io = new Server(server);
 
-app.use(express.static('public'));
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
 
 io.on('connection', (socket) => {
-  console.log('New WebSocket connection:', socket.id);
-
-  socket.on('offer', (data) => {
-    socket.broadcast.emit('offer', data);
-  });
-
-  socket.on('answer', (data) => {
-    socket.broadcast.emit('answer', data);
-  });
-
-  socket.on('ice-candidate', (data) => {
-    socket.broadcast.emit('ice-candidate', data);
-  });
-
+  console.log('a user connected');
   socket.on('disconnect', () => {
-    console.log('WebSocket disconnected:', socket.id);
+    console.log('user disconnected');
   });
 });
 
-const port = 3000;
-server.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
+server.listen(4000, () => {
+  console.log('listening on *:4000');
 });
