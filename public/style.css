@@ -1,0 +1,163 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+html,
+ body{
+    height: 100%;
+    font-family: "Roboto", "sans-serif";
+}
+#video-grid{
+    display: flex;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    overflow-y: auto;
+}
+
+video {
+    display: flex;
+    border: 5px solid black;
+    max-width: 600px;
+    max-height: 100%;
+}
+.main{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.main_left{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.main_right{
+    flex: 0.2;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-left: 1px solid #3d3d42;
+    display: none;
+}
+.showChat .main_right{
+    display: flex;
+}
+
+.showChat .main_left{
+    flex: 0.8;
+}
+.main_videos{
+    flex-grow: 1;
+    background-color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.main_controls{
+    display: flex;
+    background-color: #4033d6;
+    color: #d2d2d2;
+    padding: 5px;
+    justify-content: space-between;
+}
+.main_controls_block{
+    display: flex;
+}
+.main_controls_button{
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    justify-content: center;
+    padding: 10px;
+}
+.main_message_container{
+    padding: 22px 11px;
+    display: flex;
+}
+.main_message_container input{
+    flex-grow: 1;
+    background-color: transparent;
+    border: none;
+    color: black;
+    user-select: none;
+    outline: none;
+    height: 50px;
+    border: 1px solid #3d3d42;
+    padding-left: 20px;
+}
+#all_messages {
+background-color: aquamarine;
+height: 450px;
+
+}
+#all_messages li{
+    color: rgb(157, 19, 19);
+    padding: 5px 0;
+    text-align: right;
+    display: block;
+    font-size : 30px;
+}
+#all_messages li.otherUser{
+    text-align: left;
+}
+#all_messages li div{
+    display: inline-block;
+}
+.sendMsg{
+    width: 50px;
+    font-size: 22px;
+    background: transparent;
+    border: none;
+    cursor:pointer;
+    color: orange;
+}
+@media(max-width:640px){
+    .main_controls{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+    }
+}
+.main_controls_button span{
+   font-size: 10px;
+}
+#leave-meeting{
+    display:none;
+}
+.showChat .main_right{
+    display: flex;
+    position: fixed;
+    width: 100%;
+    height: calc(100% - 65px);
+    opacity: 0.8;
+}
+.showChat .main_left{
+    flex: 1;
+}
+.popup{
+    display:block;
+    background-color: red;
+    width: 300px;
+    height: 100px;
+}
+#invitePopup{
+    display:none;
+    background-color: red;
+    width: 700px;
+    height: 150px;
+    text-align: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 300px;
+    left: 400px;
+    font-size: 20px;
+    text-align: left;
+}
+#roomLink, #copy{
+    font-size: 40px;
+}

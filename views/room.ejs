@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script>
+        ROOM_ID = "<%= roomId %>"
+    </script>
+    <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <title>Video Conferencing</title>
+</head>
+<body>
+    
+    <div class="main">
+        <div class="main_left">
+            <!--Video Area-->
+            <div class="main_videos">
+                <div id="video-grid"></div>
+            </div>
+        </div>
+
+        <div class="main_controls">
+            <div class="main_controls_block">
+                <div class="main_controls_button" id="muteButton" onclick="muteUnmute()">
+                    <i class="fa fa-microphone"></i>
+                    <span>Mute</span>
+                </div>
+                <div class="main_controls_button" id="playPauseVideo" onclick="playStop()">
+                    <i class="fa fa-video-camera"></i>
+                    <span>Pause Video</span>
+                </div>
+            </div>
+            <div class="main_controls_block">
+                <div class="main_controls_button" id="chat_Btn" onclick="showChat(this)">
+                    <i class="fa fa-comment"></i>
+                    <span>Chat</span>
+                </div>
+                <div class="main_controls_button" id="invite" onclick="popUp(this)">
+                    <i class="fa fa-user-plus"></i>
+                    <span>Invite People</span> 
+                </div>
+            </div>
+        </div>
+        <div id="invitePopup">
+            <h2>Copy Link</h2>
+            <input type="text" value=".." id="roomLink" readonly>
+            <button id="copy" onclick="copyToClipboard()">Copy</button>
+        </div>
+        <div class="main_right">
+            <!--Chat Area-->
+            <div class="main_header">
+                <h2><span></span>Live Chat</h6>
+            </div>
+            <div class="main_message_container">
+                <input type="text" id="chat_message" placeholder="Type messages here">
+                <button class="sendMsg" id="sendMsg" >
+                    <i class="fa fa-paper-plane"></i>
+                </button>
+            </div>
+            <div class="main_chat_window" id="main_chat_window">
+                <ul class="messages" id="all_messages"></ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>    
+</body>
+</html>
